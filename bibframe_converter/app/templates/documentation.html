@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CSV Documentation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">CSV to RDF Converter</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="/documentation">Documentation <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">CSV Documentation</li>
+        </ol>
+      </nav>
+      <h1 class="mt-5">CSV Documentation</h1>
+      <p>The input CSV file should have the following format:</p>
+      <pre>
+subject,type,predicate,object
+http://example.org/book1,http://schema.org/Book,http://schema.org/name,Example Book
+http://example.org/book1,http://schema.org/Book,http://schema.org/author,John Doe
+http://example.org/book1,http://schema.org/Book,http://schema.org/datePublished,2020-01-01
+      </pre>
+      <p>Each row in the CSV file represents a triple (subject, predicate, object) for the RDF graph.</p>
+    </div>
+  </body>
+</html>

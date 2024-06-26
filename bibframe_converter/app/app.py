@@ -59,6 +59,10 @@ class RDFGraphBuilder:
 def upload_form():
     return render_template('upload.html')
 
+@app.route('/documentation')
+def documentation():
+    return render_template('documentation.html')
+
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
@@ -77,7 +81,7 @@ def upload_file():
         builder.build().serialize(destination=output_file_path, format=format)
         with open(output_file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        response = {'content': content, 'format': format, 'filename': f'output.{format}', 'success': 'File processed successfully!'}
+        response = {'content': content, 'format': format, 'filename': f'output.{format}', 'success': True}
         if not display:
             response.pop('content')
         return jsonify(response)
@@ -86,6 +90,10 @@ def upload_file():
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_file(os.path.join(app.config['OUTPUT_FOLDER'], filename), as_attachment=True)
+
+@app.route('/image')
+def serve_image():
+    return send_file('/mnt/data/image.png', mimetype='image/png')
 
 class FileUploadAPI(Resource):
     def post(self):
@@ -106,7 +114,7 @@ class FileUploadAPI(Resource):
             builder.build().serialize(destination=output_file_path, format=format)
             with open(output_file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-            response = {'content': content, 'format': format, 'filename': f'output.{format}', 'success': 'File processed successfully!'}
+            response = {'content': content, 'format': format, 'filename': f'output.{format}', 'success': True}
             if not display:
                 response.pop('content')
             return jsonify(response)
