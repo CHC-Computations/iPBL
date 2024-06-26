@@ -89,7 +89,7 @@ class FileUploadAPI(Resource):
             builder.add_triples_from_csv(file_path).build()
             output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], 'output.ttl')
             builder.build().serialize(destination=output_file_path, format='turtle')
-            return send_file(output_file_path, as_attachment=True, attachment_filename='output.ttl')
+            return send_file(output_file_path, as_attachment=True, download_name='output.ttl')
         return {'error': 'File upload failed'}, 400
 
 api.add_resource(FileUploadAPI, '/api/upload')
