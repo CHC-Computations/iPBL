@@ -2,6 +2,7 @@ import csv
 from rdflib import Graph, Namespace, URIRef, Literal
 from rdflib.namespace import RDF, RDFS, SKOS
 import os
+import pandas as pd
 
 class RDFGraphBuilder:
     def __init__(self):
