@@ -1,17 +1,13 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jun 26 10:33:57 2024
-
-@author: patry
-"""
-
 import csv
 import os
-from flask import Flask, request, redirect, url_for, send_file, render_template
+from flask import Flask, request, redirect, url_for, send_file, render_template, jsonify
+from flask_restful import Api, Resource
+from flask_swagger_ui import get_swaggerui_blueprint
 from rdflib import Graph, Namespace, URIRef, Literal
 from rdflib.namespace import RDF, RDFS, SKOS
 
 app = Flask(__name__)
+api = Api(app)
 UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'outputs'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -77,6 +73,38 @@ def upload_file():
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_file(os.path.join(app.config['OUTPUT_FOLDER'], filename), as_attachment=True)
+
+class FileUploadAPI(Resource):
+    def post(self):
+        """Upload CSV file and get RDF output"""
+        if 'file' not in request.files:
+            return {'error': 'No file part in the request'}, 400
+        file = request.files['file']
+        if file.filename == '':
+            return {'error': 'No file selected for uploading'}, 400
+        if file:
+            file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(file_path)
+            builder = RDFGraphBuilder()
+            builder.add_triples_from_csv(file_path).build()
+            output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], 'output.ttl')
+            builder.build().serialize(destination=output_file_path, format='turtle')
+            return send_file(output_file_path, as_attachment=True, attachment_filename='output.ttl')
+        return {'error': 'File upload failed'}, 400
+
+api.add_resource(FileUploadAPI, '/api/upload')
+
+### Swagger UI setup ###
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "CSV to RDF API"
+    }
+)
+app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 if __name__ == "__main__":
     app.run(debug=True)
