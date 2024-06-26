@@ -28,14 +28,17 @@ class RDFGraphBuilder:
         SCHEMA = Namespace("http://schema.org/")
         BIBFRAME = Namespace("http://id.loc.gov/ontologies/bibframe/")
         self.graph.bind("schema", SCHEMA)
-        self.graph.bind("bibframe", BIBFRAME)
+        self.graph.bind("bf", BIBFRAME)
         self.graph.bind("skos", SKOS)
         return self
 
     def add_triple(self, subject, predicate, obj):
         subject = URIRef(subject)
         predicate = URIRef(predicate)
-        obj = Literal(obj)
+        if obj.startswith("http://") or obj.startswith("https://"):
+            obj = URIRef(obj)
+        else:
+            obj = Literal(obj)
         self.graph.add((subject, predicate, obj))
         return self
 
@@ -43,7 +46,10 @@ class RDFGraphBuilder:
         with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
             csvreader = csv.DictReader(csvfile)
             for row in csvreader:
-                self.add_triple(row['subject'], row['predicate'], row['object'])
+                subject = row['subject']
+                rdf_type = row['type']
+                self.add_triple(subject, RDF.type, rdf_type)
+                self.add_triple(subject, row['predicate'], row['object'])
         return self
 
     def build(self):
@@ -56,19 +62,26 @@ def upload_form():
 @app.route('/upload', methods=['POST'])
 def upload_file():
     if 'file' not in request.files:
-        return redirect(request.url)
+        return jsonify({'error': 'No file part in the request'}), 400
     file = request.files['file']
     if file.filename == '':
-        return redirect(request.url)
+        return jsonify({'error': 'No file selected for uploading'}), 400
+    format = request.form['format']
+    display = 'display' in request.form
     if file:
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
         builder = RDFGraphBuilder()
         builder.add_triples_from_csv(file_path).build()
-        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], 'output.ttl')
-        builder.build().serialize(destination=output_file_path, format='turtle')
-        return redirect(url_for('download_file', filename='output.ttl'))
-    return redirect(request.url)
+        output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], f'output.{format}')
+        builder.build().serialize(destination=output_file_path, format=format)
+        with open(output_file_path, 'r', encoding='utf-8') as f:
+            content = f.read()
+        response = {'content': content, 'format': format, 'filename': f'output.{format}', 'success': 'File processed successfully!'}
+        if not display:
+            response.pop('content')
+        return jsonify(response)
+    return jsonify({'error': 'File upload failed'}), 400
 
 @app.route('/download/<filename>')
 def download_file(filename):
@@ -82,14 +95,21 @@ class FileUploadAPI(Resource):
         file = request.files['file']
         if file.filename == '':
             return {'error': 'No file selected for uploading'}, 400
+        format = request.form['format']
+        display = 'display' in request.form
         if file:
             file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(file_path)
             builder = RDFGraphBuilder()
             builder.add_triples_from_csv(file_path).build()
-            output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], 'output.ttl')
-            builder.build().serialize(destination=output_file_path, format='turtle')
-            return send_file(output_file_path, as_attachment=True, download_name='output.ttl')
+            output_file_path = os.path.join(app.config['OUTPUT_FOLDER'], f'output.{format}')
+            builder.build().serialize(destination=output_file_path, format=format)
+            with open(output_file_path, 'r', encoding='utf-8') as f:
+                content = f.read()
+            response = {'content': content, 'format': format, 'filename': f'output.{format}', 'success': 'File processed successfully!'}
+            if not display:
+                response.pop('content')
+            return jsonify(response)
         return {'error': 'File upload failed'}, 400
 
 api.add_resource(FileUploadAPI, '/api/upload')

@@ -20,7 +20,7 @@
         "summary": "Upload a CSV file",
         "description": "Upload a CSV file and receive the RDF representation",
         "consumes": ["multipart/form-data"],
-        "produces": ["application/octet-stream"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "formData",
@@ -28,13 +28,42 @@
             "type": "file",
             "required": true,
             "description": "The CSV file to upload"
+          },
+          {
+            "in": "formData",
+            "name": "format",
+            "type": "string",
+            "required": true,
+            "enum": ["xml", "ttl", "nt"],
+            "description": "The format of the output RDF file"
+          },
+          {
+            "in": "formData",
+            "name": "display",
+            "type": "boolean",
+            "required": false,
+            "description": "Whether to display the RDF output in the browser"
           }
         ],
         "responses": {
           "200": {
             "description": "Successful operation",
             "schema": {
-              "type": "file"
+              "type": "object",
+              "properties": {
+                "content": {
+                  "type": "string"
+                },
+                "format": {
+                  "type": "string"
+                },
+                "filename": {
+                  "type": "string"
+                },
+                "success": {
+                  "type": "boolean"
+                }
+              }
             }
           },
           "400": {
