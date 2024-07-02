@@ -19,7 +19,7 @@ To run this application locally, follow these steps:
 
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/yourusername/csv-to-rdf-api.git
+    git clone https://github.com/CHC-Computations/iPBL.git
     cd csv-to-rdf-api
     ```
 
