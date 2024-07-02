@@ -1,0 +1,10 @@
+<http://example.org/work1> <bf:title> "Sprawdzają się rzeczy proste" .
+<http://example.org/autor1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "bf:Agent" .
+<http://example.org/autor1> <rdfs:label> "Katarzyna Niedurny" .
+<http://example.org/work1> <bf:language> <http://id.loc.gov/vocabulary/languages/pol> .
+<http://example.org/work1> <bf:Topic> "Teatr" .
+<http://example.org/work1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "bf:Work" .
+<http://example.org/work1> <bf:agent> <http://example.org/autor1> .
+<http://example.org/work1> <bf:Summary> "W spektaklu „Nasze czasy” śmieję się z tego, że największy sukces zawodowy odniosłem w 1993 roku jako dziesięciolatek. Zagrałem wtedy w trzech filmach i jednym serialu" .
+<http://example.org/autor1> <bf:identifiedBy> <https://viaf.org/viaf/311808401/#Niedurny,_Katarzyna> .
+<http://example.org/work1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "bf:Contribution" .

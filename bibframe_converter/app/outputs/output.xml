@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+   xmlns:ns1="bf:"
+   xmlns:ns2="madsrdf:"
+   xmlns:ns3="rdfs:"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <rdf:Description rdf:about="http://example.org/item2">
+    <rdf:type>bf:Item</rdf:type>
+    <ns1:electronicLocator>internet archive link</ns1:electronicLocator>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/work1">
+    <rdf:type>bf:Work</rdf:type>
+    <rdf:type>bf:Contribution</rdf:type>
+    <ns1:titlea>Sprawdzają się rzeczy proste</ns1:titlea>
+    <ns1:language>http://id.loc.gov/vocabulary/languages/pol</ns1:language>
+    <ns1:agent>http://example.org/autor1</ns1:agent>
+    <ns1:subject>http://example.org/topic1</ns1:subject>
+    <ns1:subject>http://example.org/topic2</ns1:subject>
+    <ns1:subject>http://example.org/person1</ns1:subject>
+    <ns1:summary>W spektaklu „Nasze czasy” śmieję się z tego, że największy sukces zawodowy odniosłem w 1993 roku jako dziesięciolatek. Zagrałem wtedy w trzech filmach i jednym serialu</ns1:summary>
+    <ns1:genreform>http://example.org/genreform1</ns1:genreform>
+    <ns1:hasInstance>http://example.org/instance1</ns1:hasInstance>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/genreform1">
+    <rdf:type>bf:Genreform</rdf:type>
+    <ns3:label>wywiad</ns3:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/topic2">
+    <rdf:type>bf:Topic</rdf:type>
+    <ns3:label>Piotr Wawer Junior</ns3:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/autor1">
+    <rdf:type>bf:Agent</rdf:type>
+    <ns3:label>Katarzyna Niedurny</ns3:label>
+    <ns1:identifiedBy>https://viaf.org/viaf/311808401/#Niedurny,_Katarzyna</ns1:identifiedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/item1">
+    <rdf:type>bf:Item</rdf:type>
+    <ns1:electronicLocator>https://www.dwutygodnik.com/artykul/11225-sprawdzaj-si-rzeczy-proste.html</ns1:electronicLocator>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/person1">
+    <rdf:type>bf:Person</rdf:type>
+    <ns2:authoritativeLabel>Wawer, Piotr, 1959-</ns2:authoritativeLabel>
+    <ns1:identifiedBy>https://viaf.org/viaf/25157037920366860906/#Wawer,_Piotr,_1959-</ns1:identifiedBy>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/instance1">
+    <rdf:type>bf:Instance</rdf:type>
+    <ns1:originDate>2024-04-01</ns1:originDate>
+    <ns1:hasItem>http://example.org/item1</ns1:hasItem>
+    <ns1:hasItem>http://example.org/item2</ns1:hasItem>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://example.org/topic1">
+    <rdf:type>bf:Topic</rdf:type>
+    <ns3:label>Teatr</ns3:label>
+  </rdf:Description>
+</rdf:RDF>

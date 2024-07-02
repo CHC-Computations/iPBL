@@ -1,0 +1,5 @@
+subject,type,predicate,object
+http://example.org/work1,bf:Work,bf:title,Sprawdzają się rzeczy proste
+http://example.org/work1,bf:Work,bf:language,http://id.loc.gov/vocabulary/languages/pol
+http://example.org/autor1,bf:Agent,rdfs:label,Katarzyna Niedurny
+http://example.org/work1,bf:Contribution,bf:agent,http://example.org/autor1

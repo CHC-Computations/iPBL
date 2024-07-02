@@ -1,0 +1,8 @@
+subject,type,predicate,object
+http://example.org/work1,bf:Work,bf:title,Sprawdzają się rzeczy proste
+http://example.org/work1,bf:Work,bf:language,http://id.loc.gov/vocabulary/languages/pol
+http://example.org/autor1,bf:Agent,rdfs:label,Katarzyna Niedurny
+http://example.org/work1,bf:Contribution,bf:agent,http://example.org/autor1
+http://example.org/autor1,bf:Agent,bf:identifiedBy,"https://viaf.org/viaf/311808401/#Niedurny,_Katarzyna"
+http://example.org/work1,bf:Work,bf:Topic,Teatr
+http://example.org/work1,bf:Work,bf:Summary,"W spektaklu „Nasze czasy” śmieję się z tego, że największy sukces zawodowy odniosłem w 1993 roku jako dziesięciolatek. Zagrałem wtedy w trzech filmach i jednym serialu"

@@ -1,0 +1,44 @@
+@prefix ns1: <bf:> .
+@prefix ns2: <rdfs:> .
+@prefix ns3: <madsrdf:> .
+
+<http://example.org/autor1> a "bf:Agent" ;
+    ns1:identifiedBy "https://viaf.org/viaf/311808401/#Niedurny,_Katarzyna" ;
+    ns2:label "Katarzyna Niedurny" .
+
+<http://example.org/genreform1> a "bf:Genreform" ;
+    ns2:label "wywiad" .
+
+<http://example.org/instance1> a "bf:Instance" ;
+    ns1:hasItem "http://example.org/item1",
+        "http://example.org/item2" ;
+    ns1:originDate "2024-04-01" .
+
+<http://example.org/item1> a "bf:Item" ;
+    ns1:electronicLocator "https://www.dwutygodnik.com/artykul/11225-sprawdzaj-si-rzeczy-proste.html" .
+
+<http://example.org/item2> a "bf:Item" ;
+    ns1:electronicLocator "internet archive link" .
+
+<http://example.org/person1> a "bf:Person" ;
+    ns1:identifiedBy "https://viaf.org/viaf/25157037920366860906/#Wawer,_Piotr,_1959-" ;
+    ns3:authoritativeLabel "Wawer, Piotr, 1959-" .
+
+<http://example.org/topic1> a "bf:Topic" ;
+    ns2:label "Teatr" .
+
+<http://example.org/topic2> a "bf:Topic" ;
+    ns2:label "Piotr Wawer Junior" .
+
+<http://example.org/work1> a "bf:Contribution",
+        "bf:Work" ;
+    ns1:agent "http://example.org/autor1" ;
+    ns1:genreform "http://example.org/genreform1" ;
+    ns1:hasInstance "http://example.org/instance1" ;
+    ns1:language "http://id.loc.gov/vocabulary/languages/pol" ;
+    ns1:subject "http://example.org/person1",
+        "http://example.org/topic1",
+        "http://example.org/topic2" ;
+    ns1:summary "W spektaklu „Nasze czasy” śmieję się z tego, że największy sukces zawodowy odniosłem w 1993 roku jako dziesięciolatek. Zagrałem wtedy w trzech filmach i jednym serialu" ;
+    ns1:titlea "Sprawdzają się rzeczy proste" .
+

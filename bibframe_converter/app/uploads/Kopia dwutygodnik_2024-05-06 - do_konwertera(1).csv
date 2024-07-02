@@ -1,0 +1,22 @@
+subject,type,predicate,object
+http://example.org/work1,bf:Work,bf:titlea,Sprawdzają się rzeczy proste
+http://example.org/work1,bf:Work,bf:language,http://id.loc.gov/vocabulary/languages/pol
+http://example.org/autor1,bf:Agent,rdfs:label,Katarzyna Niedurny
+http://example.org/work1,bf:Contribution,bf:agent,http://example.org/autor1
+http://example.org/autor1,bf:Agent,bf:identifiedBy,"https://viaf.org/viaf/311808401/#Niedurny,_Katarzyna"
+http://example.org/work1,bf:Work,bf:subject ,http://example.org/topic1
+http://example.org/topic1,bf:Topic,rdfs:label,Teatr
+http://example.org/work1,bf:Work,bf:summary,"W spektaklu „Nasze czasy” śmieję się z tego, że największy sukces zawodowy odniosłem w 1993 roku jako dziesięciolatek. Zagrałem wtedy w trzech filmach i jednym serialu"
+http://example.org/work1,bf:Work,bf:subject ,http://example.org/topic2
+http://example.org/topic2,bf:Topic,rdfs:label,Piotr Wawer Junior
+http://example.org/work1,bf:Work,bf:genreform,http://example.org/genreform1
+http://example.org/genreform1,bf:Genreform,rdfs:label,wywiad
+http://example.org/work1,bf:Work,bf:subject ,http://example.org/person1
+http://example.org/person1,bf:Person,madsrdf:authoritativeLabel,"Wawer, Piotr, 1959-"
+http://example.org/person1,bf:Person,bf:identifiedBy,"https://viaf.org/viaf/25157037920366860906/#Wawer,_Piotr,_1959-"
+http://example.org/work1,bf:Work,bf:hasInstance,http://example.org/instance1
+http://example.org/instance1,bf:Instance,bf:originDate,2024-04-01
+http://example.org/instance1,bf:Instance,bf:hasItem,http://example.org/item1
+http://example.org/item1,bf:Item,bf:electronicLocator,https://www.dwutygodnik.com/artykul/11225-sprawdzaj-si-rzeczy-proste.html
+http://example.org/instance1,bf:Instance,bf:hasItem,http://example.org/item2
+http://example.org/item2,bf:Item,bf:electronicLocator,internet archive link
